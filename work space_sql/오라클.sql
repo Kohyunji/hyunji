@@ -134,3 +134,107 @@ select to_char(hiredate, 'yyyy"년" mm"월" dd"일" hh24"시" mi"분" ss"초"') 
 
 select to_date('2025-05-15', 'yyyy-mm-dd') - to_date('1996-04-01', 'yyyy-mm-dd');
 
+-- 각 사원의 연봉을 출력
+-- 월급 * 12 + comm
+-- ename, total_pay 출력
+
+select ename,sal*12 + comm, sal*12 + NVL(COMM, 0) AS TOTAL_PAY from emp;
+
+SELECT EMPNO, ENAME, JOB, SAL,
+DECODE(JOB,
+'MANAGER', SAL*1.1,
+'SALESMAN', SAL*1.05,
+'ANALYST' , SAL,
+SAL*1.03) AS UPSAL
+FROM EMP;
+
+SELECT EMPNO, ENAME, JOB, SAL,
+CASE JOB
+WHEN 'MANAGER' THEN SAL*1.1
+WHEN 'SALESMAN' THEN SAL*1.05
+WHEN 'ANALYST' THEN 
+SAL
+ELSE SAL*1.03
+END AS UPSAL
+FROM EMP;
+ 
+ --nvl 사용하지 않고
+ --decode, case로 nvl이랑 동일한 결과 출력하기
+ 
+-- where comm = null
+select comm,
+case
+when comm is null then '해당 없음'
+when comm = 0 then '0원'
+when comm > 0 then '수당 : ' || comm
+end as case
+from emp;
+
+select
+empno, ename, sal,
+trunc(sal / 21.5, 2) day_pay,
+round((sal / 21.5) / 8, 1) as time_pay
+from emp;
+
+-- Q4
+select empno, ename, mgr,
+case
+when mgr is null then '0000'
+when substr(mgr, 1,2) = 75 then '5555' 
+when substr(mgr, 1,2) = 76 then '6666'
+when substr(mgr, 1,2) = 77 then '7777' 
+when substr(mgr, 1,2) = 78 then '8888'
+else to_char(mgr)
+end
+from emp;
+
+select
+sum(sal)
+from emp;
+
+select sum(comm) from emp;
+
+select count(*), sum(sal)
+from emp;
+
+select count(sal), count(comm) from emp;
+
+select max(sal), min(sal), min(hiredate), min(comm) from emp;
+
+--이름에 a가 들어가는 사람은 몇 명?
+select * from emp
+where ename like '%A%';
+
+select avg(sal) from emp;
+
+--다중행 함수(집계 함수)는 where에서 사용할 수 없다
+--select *
+--from emp
+--where sal > avg(sal);
+
+select deptno, sum(sal), count(*)
+from emp
+group by deptno;
+
+select job
+from emp
+where deptno = 10
+group by job
+order by job desc;
+
+select job, deptno, avg(sal)
+from emp
+group by deptno, job
+having avg(sal) > 2000;
+
+select job, count(*) as cnt 
+from emp
+where sal > 1000-- and cnt >= 3 -- and count (*) >= 3
+group by job
+having count(*) >= 3
+order by cnt desc;
+
+
+
+
+

@@ -291,3 +291,4 @@ union all
 select empno, ename, job, mgr, hiredate, sal, comm, deptno
 from emp
 where sal>3000
+order by empno;

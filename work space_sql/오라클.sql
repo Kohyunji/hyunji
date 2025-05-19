@@ -234,7 +234,60 @@ group by job
 having count(*) >= 3
 order by cnt desc;
 
+select * from dept;
 
+select *
+from emp, dept
+order by empno;
 
+select e.ename, e.deptno 
+from emp e, dept d
+where e.deptno = d.deptno
+order by empno;
 
+select * from salgrade;
 
+select e1.empno, e1.ename, e1. mgr, e2. empno, e2. ename
+from emp e1, emp e2
+where e1.mgr = e2. empno;
+
+--총 13개 나옴
+
+Select empno, ename, deptno
+from emp e join dept d using(deptno)
+where sal >= 3000;
+
+select *
+from emp
+where ename like '%S';
+
+select empno, ename, job, sal, deptno
+from emp
+where deptno=30
+and job='SALESMAN';
+
+select empno, ename, job, sal, deptno
+from emp
+where sal>2000
+
+intersect;
+
+Select empno, ename, job, sal, deptno
+from emp
+where deptno=20
+union
+select empno, ename, job, sal, deptno
+from emp
+where deptno=30
+intersect
+select empno, ename, job, sal, deptno
+from emp
+where sal>2000;
+
+select empno, ename, job, mgr, hiredate, sal, comm, deptno
+from emp
+where sal<2000
+union all
+select empno, ename, job, mgr, hiredate, sal, comm, deptno
+from emp
+where sal>3000

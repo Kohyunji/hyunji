@@ -292,3 +292,73 @@ select empno, ename, job, mgr, hiredate, sal, comm, deptno
 from emp
 where sal>3000
 order by empno;
+
+--퀴즈
+--각 부서별로 급여가 가장 높은 사원, 가장 낮은 사원의 급여차이를 가지오니라
+select max(sal)
+from emp;
+select min(sal)
+from emp;
+
+select deptno, max(sal), min(sal), max(sal) - min(sal) 급여차이
+from emp
+group by deptno;
+
+--심화
+--job을 총 20자 중 가운데 정렬
+--가운데 정렬?
+--전체 길이의 반 - 글씨 길이의 반
+--일단 왼쪽 채우고
+--다음에 오른쪽 채우고
+select 
+job,
+lpad( job, length(job)/2 + 20/2, '-' ),
+rpad(lpad(job, length(job)/2 + 20/2, '-' ),
+20, 
+'-' )
+from emp;
+
+select *
+from emp
+where hiredate < ( select hiredate
+from emp
+where ename = 'SCOTT');
+
+--from절에서의 서브쿼리
+select *
+from
+   (select * from emp where deptno = 10) e10,
+    dept d
+where e10.deptno = d.deptno;
+
+select rownum rn, emp.*
+from emp
+order by sal desc;
+
+select rownum rn, e. *
+from (
+ select emp. *
+from emp
+order by sal desc
+) e;
+--열심히 하자 ^^
+
+with e10 as (
+   select * from emp where deptno  = 10
+   )
+select ename from e10;
+
+select sal, (select grade
+from salgrade
+where e.sal between losal and hisal) salgrade,
+deptno, (select dname
+from dept
+where e.deptno = dept.deptno) as dname
+from emp e;
+
+select instr('hello, oracle!', 'e', 5)
+from dual; 
+
+
+
+

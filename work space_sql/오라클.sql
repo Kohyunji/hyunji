@@ -357,8 +357,124 @@ where e.deptno = dept.deptno) as dname
 from emp e;
 
 select instr('hello, oracle!', 'e', 5)
-from dual; 
+from dual;
+
+select empno, ename, sal, comm, sal+comm,
+nvl(comm, 0),
+sal+nvl(comm,0)
+from emp;
+
+select sal+nvl(comm,0)
+from emp
+order by sal;
+
+1. select *
+  from emp
+where comm IS NULL
+order by sal;
+
+select s.grade, count(*)
+from emp e, salgrade s
+where e.sal between s.losal and s.hisal
+group by s.grade
+order by s.grade;
+
+-----------------
+desc emp;
+
+create table emp_ddl(
+empno number(4),
+ename varchar2(10),
+job varchar2(9),
+mgr number(4),
+hiredate date,
+sal number(7,2),
+comm number(7,2),
+deptno number(2)
+);
+desc emp_ddl;
+
+select * from emp_ddl;
+
+desc dept_ddl;
+select * from dept_ddl;
+
+CREATE TABLE EMPDEPT_DDL
+AS SELECT E.EMPNO, E.ENAME, E.JOB , E.MGR, E.HIREDATE,
+E.SAL, E.COMM, D.DEPTNO, D.DNAME, D.LOC
+FROM EMP E, DEPT D
+WHERE 1 <> 1;
+
+SELECT * FROM EMPDEPT_DDL;
 
 
+-------
+alter table emp_alter
+rename column hp tel2;
+select * from emp_alter;
 
+-----------------------
 
+alter table emp_alter
+modify empno number(5);
+desc emp_alter;
+
+--수정할 때 타입의 크기가 커지는 건 가능하지만
+--줄어드는건 불가능
+alter table emp_alter
+modify empno number(4);
+
+alter table emp_alter
+drop column tel;
+select * from emp_alter;
+--
+rename emp_alter to emp_rename;
+select * from emp_rename;
+
+truncate table emp_rename;
+
+select * from emp_rename;
+
+drop table emp_rename;
+
+desc emp_rename;
+
+-----------------
+insert into emp_temp 
+select * from emp where deptno = 10;
+
+------
+create table dept_temp2
+as select * from dept;
+select * from dept_temp2;
+
+create table emp_tmp
+as select * from emp;
+select * from emp_tmp;
+
+select sal, sal * 1.03 from emp_tmp
+where sal < 1000;
+
+update emp_tmp
+set sal = sal * 1.03
+where sal < 1000;
+
+select * from emp_tmp
+where sal < 1000;
+
+-------------
+create table emp_temp2
+as select * from emp;
+select * from emp_temp2;
+
+commit;
+
+delete emp_temp2;
+select * from emp_temp2;
+
+rollback;
+
+delete emp,temp2
+where deptno = 10;
+
+select * from emp_temp2;

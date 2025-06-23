@@ -1,4 +1,4 @@
-package sec02.exam02;
+package sec02.exam02; 
 
 public class Forexam {
 	public static void main(String[] args) {
@@ -110,7 +110,38 @@ String space = ".";
 	 	4444
 	 	55555
 		 */
+
+		//문제 1
+		//주사위 2개를 굴려서 나올 수 있는 모든 조합을 출력
+		//[1,1][1,2]
+
+		//문제 2
+		//주사위 2개의 합 별로 나올 수 있는 조합
+		//합 2 : [1,1]
+		//합 3 : [1,2] [2,1]
+
+		//문제 3
+		// 합 별 조합의 수 출력
+
+		// 문제 4
+		// 순서에 관계 없이 중복 제거
+		//합2  : [1,1]
+		//합3 : [1,2]와 [2,1]은 같음
+
+
+	
+		
+		int i = 1;
+		while(i <=10) {
+			System.out.println(i);
+		i++;
+		}
+	
+	
+	
 	}
+	
+	
 }
 
 

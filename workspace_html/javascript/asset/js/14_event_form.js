@@ -100,7 +100,7 @@ document.querySelector('#parent')
      //this : window 객체를 가지고 있다
     console.log( this )
     console.log( this === window )
-    // this = window 
+    // this = window tt
 
 }
 

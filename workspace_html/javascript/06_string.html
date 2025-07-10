@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let str = '오늘 저녁 때 저녁 뭐 먹지?';
+
+        console.log('str.length :', str.length);
+
+        // indexOf
+        // 전달인자와 동일한 글씨가 있는 경우
+        //      첫 번째 만나는 요소의 첫 index를 돌려 줌
+        // 동일한 글씨가 없을 경우 -1을 돌려줌
+        console.log( str.indeXOf('저녁') )
+        console.log( str.indeXOf('점심') )
+
+        //replace
+        // 첫번째 전달인자를 두번째 전달인자로 바꿔 줌
+        // 기본적으로 처음 만나는 것만 한번 바꿔 줌
+        let str2 = str.replace('저녁','회식')
+        console.log(str)
+        console.log(str2)
+
+        let str3 = str.replace(/저녁/g, '회식')
+        console.log(str)
+        condole.log(str3)
+        
+        //시작, 끝 바로 앞
+        let str4 = str.substring(2,7);
+        console.log(str)
+        console.log(str4)
+        
+        //시작, 몇 개 
+         let str5 = str.substring(3, 4);
+        console.log(str)
+        console.log(str5)
+
+        //2번
+        //메일 주소 앞 두자리를 제외한 id는 *처리
+        //todair@naver.com >> to****@naver.com
+
+        //3번
+        // 인터넷 주소 중 2차 도메인 출력
+        // comic.naver.com에서 naver
+        // human.or.kr에서 or
+
+        
+
+
+
+        
+    
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
